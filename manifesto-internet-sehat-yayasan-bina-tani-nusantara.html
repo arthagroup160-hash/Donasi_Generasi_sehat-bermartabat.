@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manifesto Internet Sehat — Yayasan Bina Tani Nusantara</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --hitam: #060608;
+  --hitam-2: #0e0e12;
+  --hitam-3: #16161c;
+  --hitam-4: #1e1e26;
+  --merah: #cc1f1f;
+  --merah-terang: #e83333;
+  --merah-bara: #ff4444;
+  --merah-redup: rgba(204,31,31,0.18);
+  --merah-glow: rgba(232,51,51,0.25);
+  --putih: #ffffff;
+  --putih-2: #f0f0f4;
+  --putih-3: #c8c8d4;
+  --putih-redup: rgba(255,255,255,0.12);
+  --abu: #7070808;
+  --kilau: rgba(255,255,255,0.04);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--hitam);
+  color: var(--putih-2);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  line-height: 1.9;
+  overflow-x: hidden;
+}
+
+/* ── GRAIN + KILAU OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255,255,255,0.008) 2px,
+      rgba(255,255,255,0.008) 4px
+    );
+  pointer-events: none;
+  z-index: 998;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+}
+
+/* ── COVER ── */
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 32px;
+  position: relative;
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(204,31,31,0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 80%, rgba(204,31,31,0.08) 0%, transparent 45%),
+    radial-gradient(ellipse at 80% 70%, rgba(255,255,255,0.03) 0%, transparent 40%),
+    var(--hitam);
+  border-bottom: 1px solid rgba(204,31,31,0.3);
+  overflow: hidden;
+}
+
+/* Diagonal slash accent */
+.cover::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(135deg, transparent 60%, rgba(204,31,31,0.04) 100%);
+  pointer-events: none;
+}
+
+.cover-ornament {
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--merah));
+  margin: 0 auto 32px;
+  opacity: 0;
+  animation: revealDown 1s ease forwards 0.3s;
+  box-shadow: 0 0 12px var(--merah-glow);
+}
+
+.cover-keterangan {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--merah-bara);
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.6s;
+}
+
+.cover h1 {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(44px, 9vw, 100px);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--putih);
+  margin-bottom: 12px;
+  opacity: 0;
+  animation: fadeUp 1s ease forwards 0.9s;
+  text-shadow: 0 0 60px rgba(204,31,31,0.3);
+}
+
+.cover h1 em {
+  font-style: normal;
+  color: var(--merah-terang);
+  text-shadow: 0 0 30px var(--merah-glow), 0 0 60px rgba(204,31,31,0.2);
+}
+
+.cover-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(16px, 2.5vw, 21px);
+  font-style: italic;
+  color: rgba(200,200,212,0.7);
+  max-width: 540px;
+  margin: 24px auto 48px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 1.2s;
+  line-height: 1.6;
+}
+
+.cover-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 auto 40px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 1.4s;
+}
+
+.cover-divider span {
+  width: 48px;
+  height: 1px;
+  background: var(--merah);
+  opacity: 0.5;
+  box-shadow: 0 0 6px var(--merah-glow);
+}
+
+.cover-divider em {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(204,31,31,0.8);
+  font-style: normal;
+}
+
+.cover-author {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(200,200,212,0.5);
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 1.6s;
+}
+
+.cover-author strong {
+  color: var(--putih);
+  font-weight: 600;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 2.2s;
+}
+
+.scroll-hint span {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(204,31,31,0.5);
+}
+
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--merah), transparent);
+  opacity: 0.5;
+  animation: scrollPulse 2s ease-in-out infinite;
+  box-shadow: 0 0 8px var(--merah-glow);
+}
+
+/* ── SECTIONS ── */
+.manifesto-body {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 80px 32px 120px;
+}
+
+/* Pembuka Keprihatinan */
+.prolog {
+  margin-bottom: 72px;
+  position: relative;
+}
+
+.prolog::before {
+  content: '\201C';
+  font-family: 'Oswald', sans-serif;
+  font-size: 220px;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(204,31,31,0.08);
+  position: absolute;
+  top: -40px;
+  left: -32px;
+  pointer-events: none;
+}
+
+.prolog-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(20px, 3vw, 27px);
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--putih-2);
+  position: relative;
+  z-index: 1;
+  padding-left: 20px;
+  border-left: 3px solid var(--merah);
+  box-shadow: -4px 0 20px rgba(204,31,31,0.15);
+}
+
+.prolog-credit {
+  margin-top: 20px;
+  padding-left: 20px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--merah-bara);
+}
+
+/* Bagian Manifesto */
+.bab {
+  margin-bottom: 80px;
+}
+
+.bab-nomor {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 10px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--merah-bara);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bab-nomor::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(204,31,31,0.25);
+  max-width: 60px;
+}
+
+.bab h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(26px, 4vw, 44px);
+  font-weight: 600;
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--putih);
+  margin-bottom: 28px;
+  text-shadow: 0 0 40px rgba(204,31,31,0.15);
+}
+
+.bab h2 em {
+  font-style: normal;
+  color: var(--merah-terang);
+  text-shadow: 0 0 20px var(--merah-glow);
+}
+
+.bab p {
+  font-size: clamp(16px, 2vw, 18px);
+  color: rgba(200,200,212,0.8);
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.bab p strong {
+  color: var(--putih);
+  font-weight: 600;
+}
+
+/* Blok Kutipan Kuat */
+.blok-tegas {
+  background: rgba(204,31,31,0.06);
+  border: 1px solid rgba(204,31,31,0.25);
+  border-left: 4px solid var(--merah);
+  padding: 28px 32px;
+  margin: 36px 0;
+  border-radius: 0 2px 2px 0;
+  box-shadow: -4px 0 24px rgba(204,31,31,0.1), inset 0 0 40px rgba(204,31,31,0.03);
+}
+
+.blok-tegas p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-style: italic;
+  color: var(--putih);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Daftar Ancaman */
+.daftar-ancaman {
+  list-style: none;
+  margin: 28px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.daftar-ancaman li {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.ancaman-ikon {
+  width: 36px;
+  height: 36px;
+  background: rgba(204,31,31,0.15);
+  border: 1px solid rgba(204,31,31,0.4);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  box-shadow: 0 0 12px rgba(204,31,31,0.1);
+}
+
+.daftar-ancaman li .ancaman-teks {
+  font-size: clamp(15px, 1.8vw, 17px);
+  color: rgba(200,200,212,0.8);
+  font-weight: 400;
+}
+
+.daftar-ancaman li .ancaman-teks strong {
+  color: var(--putih);
+  font-weight: 700;
+}
+
+/* Prinsip / Pilar */
+.pilar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2px;
+  margin: 36px 0;
+  border: 1px solid rgba(204,31,31,0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  background: rgba(204,31,31,0.05);
+}
+
+.pilar {
+  padding: 28px 24px;
+  background: var(--hitam-2);
+  border-right: 1px solid rgba(204,31,31,0.1);
+  transition: background 0.3s;
+}
+
+.pilar:last-child { border-right: none; }
+.pilar:hover { background: rgba(204,31,31,0.07); }
+
+.pilar-angka {
+  font-family: 'Oswald', sans-serif;
+  font-size: 52px;
+  font-weight: 700;
+  color: rgba(204,31,31,0.2);
+  line-height: 1;
+  margin-bottom: 12px;
+  text-shadow: 0 0 20px rgba(204,31,31,0.1);
+}
+
+.pilar h4 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--putih);
+  margin-bottom: 8px;
+}
+
+.pilar p {
+  font-size: 13px;
+  color: rgba(200,200,212,0.55);
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Janji / Komitmen */
+.komitmen {
+  background: linear-gradient(135deg, rgba(204,31,31,0.12), rgba(14,14,18,0.98));
+  border: 1px solid rgba(204,31,31,0.3);
+  border-top: 3px solid var(--merah);
+  border-radius: 0 0 2px 2px;
+  padding: 48px 40px;
+  margin: 48px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 60px rgba(204,31,31,0.08), inset 0 0 80px rgba(204,31,31,0.03);
+}
+
+.komitmen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center top, rgba(204,31,31,0.1) 0%, transparent 65%);
+}
+
+.komitmen-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 10px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--merah-bara);
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.komitmen h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(22px, 3.5vw, 38px);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--putih);
+  line-height: 1.2;
+  margin-bottom: 28px;
+  position: relative;
+  text-shadow: 0 0 40px rgba(204,31,31,0.2);
+}
+
+.komitmen h3 em {
+  color: var(--merah-terang);
+  font-style: normal;
+  text-shadow: 0 0 20px var(--merah-glow);
+}
+
+.komitmen p {
+  font-size: clamp(14px, 1.8vw, 16px);
+  color: rgba(200,200,212,0.65);
+  max-width: 480px;
+  margin: 0 auto;
+  font-weight: 400;
+  position: relative;
+}
+
+/* Seruan Penutup */
+.seruan {
+  text-align: center;
+  padding: 60px 0 40px;
+  border-top: 1px solid rgba(204,31,31,0.2);
+  margin-top: 60px;
+}
+
+.seruan-ornamen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.seruan-ornamen span {
+  width: 40px;
+  height: 1px;
+  background: var(--merah);
+  opacity: 0.4;
+  box-shadow: 0 0 6px var(--merah-glow);
+}
+
+.seruan-ornamen em {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(204,31,31,0.6);
+  font-style: normal;
+}
+
+.seruan h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(32px, 6vw, 68px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.1;
+  color: var(--putih);
+  margin-bottom: 28px;
+  text-shadow: 0 0 60px rgba(204,31,31,0.2);
+}
+
+.seruan h2 em {
+  font-style: normal;
+  color: var(--merah-terang);
+  text-shadow: 0 0 30px var(--merah-glow);
+}
+
+.seruan p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(16px, 2.2vw, 21px);
+  color: rgba(200,200,212,0.72);
+  max-width: 520px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+
+.ttd-block {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 20px;
+  padding: 24px 48px;
+  border: 1px solid rgba(204,31,31,0.3);
+  border-top: 2px solid var(--merah);
+  border-radius: 0 0 2px 2px;
+  background: rgba(204,31,31,0.04);
+  box-shadow: 0 0 30px rgba(204,31,31,0.06);
+}
+
+.ttd-block .ttd-jabatan {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--merah-bara);
+}
+
+.ttd-block .ttd-nama {
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--putih);
+  text-shadow: 0 0 20px rgba(255,255,255,0.1);
+}
+
+.ttd-block .ttd-org {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(200,200,212,0.45);
+}
+
+/* Footer */
+footer {
+  background: var(--hitam-2);
+  border-top: 1px solid rgba(204,31,31,0.15);
+  padding: 40px 32px;
+  text-align: center;
+}
+
+.footer-logo {
+  font-family: 'Oswald', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--putih);
+  margin-bottom: 6px;
+}
+
+.footer-sub {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(200,200,212,0.3);
+}
+
+/* ── KILAU / SHIMMER pada teks judul ── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.cover h1 {
+  background: linear-gradient(
+    105deg,
+    var(--putih) 30%,
+    rgba(255,180,180,0.9) 45%,
+    var(--putih) 55%,
+    rgba(255,120,120,0.7) 70%,
+    var(--putih) 80%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeUp 1s ease forwards 0.9s, shimmer 4s linear infinite 2s;
+  opacity: 0;
+}
+
+.cover h1 em {
+  background: linear-gradient(
+    105deg,
+    var(--merah) 20%,
+    var(--merah-bara) 40%,
+    #ff8888 55%,
+    var(--merah-terang) 70%,
+    var(--merah) 85%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite 1s;
+  font-style: normal;
+  text-shadow: none;
+  display: inline;
+}
+
+/* Glow pulse pada merah */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(204,31,31,0.15), inset 0 0 30px rgba(204,31,31,0.04); }
+  50% { box-shadow: 0 0 40px rgba(204,31,31,0.3), inset 0 0 50px rgba(204,31,31,0.08); }
+}
+
+.komitmen { animation: glowPulse 4s ease-in-out infinite; }
+
+/* Scan-line merah pada cover */
+.cover::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--merah-terang), transparent);
+  opacity: 0;
+  animation: scanLine 6s ease-in-out infinite 3s;
+  pointer-events: none;
+}
+
+@keyframes scanLine {
+  0%   { top: 0%; opacity: 0; }
+  5%   { opacity: 0.6; }
+  95%  { opacity: 0.3; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes revealDown {
+  from { opacity: 0; height: 0; }
+  to { opacity: 1; height: 60px; }
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.7; }
+}
+
+/* Scroll-triggered fade */
+.bab, .prolog, .blok-tegas, .komitmen, .seruan {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.bab.visible, .prolog.visible, .blok-tegas.visible,
+.komitmen.visible, .seruan.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Merah strip aksen di kiri manifesto body */
+.manifesto-body {
+  position: relative;
+}
+.manifesto-body::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--merah) 20%, var(--merah) 80%, transparent);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+/* Strong text highlight */
+strong {
+  color: var(--putih);
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .cover { padding: 60px 24px; }
+  .manifesto-body { padding: 48px 20px 80px; }
+  .komitmen { padding: 32px 24px; }
+  .pilar-grid { grid-template-columns: 1fr 1fr; }
+  .prolog::before { font-size: 120px; top: -20px; left: -16px; }
+  .cover h1 { font-size: clamp(38px, 10vw, 72px); }
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+  <canvas id="coverCanvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.85;"></canvas>
+  <div style="position:relative;z-index:1;display:contents;">
+  <div class="cover-ornament"></div>
+  <div class="cover-keterangan">Manifesto Resmi · Yayasan Bina Tani Nusantara</div>
+  <h1>Internet <em>Sehat</em><br>Generasi<br><em>Bermartabat</em></h1>
+  <p class="cover-sub">Sebuah seruan kepedulian, sebuah janji kepada anak cucu, dan sebuah gerakan yang lahir dari keprihatinan hati yang paling dalam</p>
+  <div class="cover-divider">
+    <span></span>
+    <em>Kampung Mandiri Digital · Sukabumi · Jawa Barat</em>
+    <span></span>
+  </div>
+  <div class="cover-author">Digagas oleh <strong>Moch Malvie Alkhudriyah</strong> · Ketua Umum Y-BTN</div>
+  <div class="scroll-hint">
+    <span>Baca Manifesto</span>
+    <div class="scroll-line"></div>
+  </div>
+  </div><!-- end z-index wrapper -->
+</section>
+
+<!-- BODY MANIFESTO -->
+<div class="manifesto-body">
+
+  <!-- PROLOG -->
+  <div class="prolog">
+    <p class="prolog-text">
+      "Kami hadir bukan karena ingin terkenal. Kami hadir karena tidak sanggup diam menyaksikan generasi kita tenggelam — satu per satu — dalam arus yang tak kasat mata namun lebih berbahaya dari banjir bandang sekalipun."
+    </p>
+    <div class="prolog-credit">— Moch Malvie Alkhudriyah · Pendiri Y-BTN</div>
+  </div>
+
+  <!-- BAB I: KEPRIHATINAN -->
+  <div class="bab">
+    <div class="bab-nomor">I · Keprihatinan</div>
+    <h2>Kami Melihat<br>Apa yang <em>Terjadi</em></h2>
+
+    <p>Di kampung-kampung kami — di pelosok Sukabumi, di lereng gunung, di tepian sawah — ada sesuatu yang sedang direnggut dari tangan anak-anak kami. Bukan oleh orang asing. Bukan oleh bencana alam. Melainkan oleh sebuah kotak kecil yang dipegang setiap hari: <strong>telepon genggam dengan internet yang bebas tak bertuan.</strong></p>
+
+    <p>Kami menyaksikan pemuda yang dulu bersemangat di ladang, kini duduk membungkuk berjam-jam. Kami menyaksikan anak-anak yang belum cukup umur terpapar gambar-gambar yang merusak akal dan jiwa. Kami menyaksikan kepala keluarga yang terlilit pinjaman online hingga kehilangan harga dirinya. Kami menyaksikan semua ini — dan kami tidak bisa berpura-pura tidak melihat.</p>
+
+    <div class="blok-tegas">
+      <p>"Semua racun ini datang dari satu sumber yang sama: jaringan internet yang bebas dan tak terkendali, yang masuk ke kampung tanpa penjaga, tanpa filter, tanpa kebijaksanaan."</p>
+    </div>
+
+    <ul class="daftar-ancaman">
+      <li>
+        <div class="ancaman-ikon">🎰</div>
+        <div class="ancaman-teks"><strong>Judi Online (Judol)</strong> — Merenggut nafkah keluarga, menghancurkan rumah tangga, dan membunuh harapan dalam hitungan malam.</div>
+      </li>
+      <li>
+        <div class="ancaman-ikon">🔞</div>
+        <div class="ancaman-teks"><strong>Konten Pornografi</strong> — Merusak akhlak sejak dini, memperbudak pikiran remaja, dan membunuh rasa malu yang menjadi fondasi budaya kita.</div>
+      </li>
+      <li>
+        <div class="ancaman-ikon">💸</div>
+        <div class="ancaman-teks"><strong>Pinjaman Online (Pinjol)</strong> — Menjerat warga dengan bunga mencekik, mengancam keselamatan keluarga, dan merampas kedamaian hidup.</div>
+      </li>
+      <li>
+        <div class="ancaman-ikon">🕳️</div>
+        <div class="ancaman-teks"><strong>Konten Negatif Lainnya</strong> — Hoaks, ujaran kebencian, konten kekerasan — yang meracuni akal sehat dan memecah-belah persatuan kampung.</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- BAB II: KEYAKINAN -->
+  <div class="bab">
+    <div class="bab-nomor">II · Keyakinan</div>
+    <h2>Kami Percaya<br><em>Masih Ada Jalan</em></h2>
+
+    <p>Kami tidak menolak internet. Kami tidak memusuhi teknologi. Kami percaya bahwa internet, jika dikelola dengan bijaksana, adalah <strong>cahaya yang menerangi kampung</strong> — membuka akses ilmu, pasar, dan komunikasi yang dulu hanya mimpi bagi warga terpencil.</p>
+
+    <p>Yang kami tolak adalah keangkuhan yang membiarkan teknologi masuk tanpa tanggung jawab. Yang kami lawan adalah sistem yang mengizinkan racun mengalir bebas ke dalam rumah-rumah tanpa ada yang berjaga di pintu.</p>
+
+    <p><strong>Kami percaya: setiap kampung berhak memiliki internet — tetapi internet yang sehat, yang terpagari nilai, yang dijaga oleh komunitas sendiri.</strong></p>
+
+    <div class="blok-tegas">
+      <p>"Generasi bermartabat tidak lahir dari ruang hampa. Ia lahir dari lingkungan yang diperjuangkan — oleh orang tua yang peduli, oleh pemimpin yang sadar, oleh komunitas yang bangkit bersama."</p>
+    </div>
+  </div>
+
+  <!-- BAB III: PILAR GERAKAN -->
+  <div class="bab">
+    <div class="bab-nomor">III · Pilar Gerakan</div>
+    <h2>Empat Pilar<br><em>Internet Sehat</em></h2>
+
+    <p>Gerakan Internet Sehat Y-BTN berdiri di atas empat pilar yang saling menopang — bukan hanya teknologi, melainkan sebuah ekosistem nilai yang utuh.</p>
+
+    <div class="pilar-grid">
+      <div class="pilar">
+        <div class="pilar-angka">01</div>
+        <h4>Infrastruktur Terkendali</h4>
+        <p>Jaringan internet kampung dibangun sendiri, dikelola sendiri — dengan sistem filtering DNS yang memblokir konten berbahaya sejak di tingkat jaringan, bukan sekadar aplikasi.</p>
+      </div>
+      <div class="pilar">
+        <div class="pilar-angka">02</div>
+        <h4>Edukasi Keluarga</h4>
+        <p>Orang tua dibekali literasi digital — bukan untuk menguasai teknologi, tetapi untuk mengenali bahayanya dan menjadi penjaga pertama bagi anak-anaknya.</p>
+      </div>
+      <div class="pilar">
+        <div class="pilar-angka">03</div>
+        <h4>Nilai & Budaya Lokal</h4>
+        <p>Kearifan Sunda dan nilai Islam menjadi kompas — bukan penghalang kemajuan, melainkan pengikat agar kemajuan tidak kehilangan jiwa dan martabatnya.</p>
+      </div>
+      <div class="pilar">
+        <div class="pilar-angka">04</div>
+        <h4>Kemandirian Kampung</h4>
+        <p>Kampung mampu mengelola, membiayai, dan mengembangkan sistem internet sehatnya sendiri — tanpa bergantung sepenuhnya pada pihak luar.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BAB IV: KEPADA PARA ORANG TUA -->
+  <div class="bab">
+    <div class="bab-nomor">IV · Seruan kepada Orang Tua</div>
+    <h2>Kepada <em>Para Orang Tua</em><br>di Kampung Kami</h2>
+
+    <p>Wahai para bapak dan ibu — kami tahu Anda lelah. Kami tahu mencari nafkah dari ladang tidak pernah mudah. Kami tahu tidak semua di antara Anda fasih dalam dunia digital. Dan justru karena itulah kami hadir.</p>
+
+    <p>Anda tidak perlu menjadi ahli teknologi untuk melindungi anak Anda. Yang Anda butuhkan hanyalah <strong>satu keputusan: memilih jaringan internet yang aman untuk rumah Anda.</strong></p>
+
+    <p>Ketika anak Anda terhubung ke jaringan Internet Sehat Y-BTN, ada sistem yang berjaga di belakang layar — memblokir situs judol, pornografi, dan pinjol secara otomatis, sebelum konten itu sempat muncul di layar anak Anda. Anda tidak perlu mengawasinya 24 jam. Sistem itu bekerja untuk Anda.</p>
+
+    <div class="blok-tegas">
+      <p>"Melindungi anak dari racun digital bukan urusan pemerintah semata. Ia adalah tanggung jawab kita — sebagai orang tua, sebagai tetangga, sebagai satu kampung yang saling menjaga."</p>
+    </div>
+
+    <p>Bergabunglah bersama kami. Bukan sebagai peserta program — tetapi sebagai <strong>penjaga generasi</strong>. Karena anak-anak kita berhak tumbuh dalam dunia yang lebih baik dari yang kita warisi.</p>
+  </div>
+
+  <!-- KOMITMEN -->
+  <div class="komitmen">
+    <div class="komitmen-label">Komitmen Yayasan</div>
+    <h3>Kami Berjanji kepada<br><em>Generasi yang Akan Datang</em></h3>
+    <p>Bahwa kami tidak akan berhenti sebelum setiap kampung di wilayah ini memiliki akses internet yang sehat, terjaga, dan bermartabat. Bahwa perjuangan ini bukan untuk hari ini saja — melainkan untuk masa depan yang belum bisa berbicara untuk dirinya sendiri.</p>
+  </div>
+
+  <!-- SERUAN PENUTUP -->
+  <div class="seruan">
+    <div class="seruan-ornamen">
+      <span></span>
+      <em>Penutup Manifesto</em>
+      <span></span>
+    </div>
+
+    <h2>Sadar <em>Tani,</em><br>Sadar <em>Digital,</em><br>Sadar <em>Menjaga</em></h2>
+
+    <p>Kampung yang kuat bukan hanya kampung yang sawahnya subur dan ladangnya hijau — melainkan kampung yang pikiran warganya juga sehat, jernih, dan bermartabat.</p>
+
+    <p>Gerakan ini bukan milik yayasan. Gerakan ini milik kita semua. Mari bersatu — untuk anak-anak kita, untuk cucu-cucu kita, untuk kampung yang kita cintai.</p>
+
+    <div class="ttd-block">
+      <div class="ttd-jabatan">Ketua Umum · Pendiri</div>
+      <div class="ttd-nama">Moch Malvie Alkhudriyah</div>
+      <div class="ttd-org">Yayasan Bina Tani Nusantara · Sukabumi</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Yayasan Bina Tani Nusantara</div>
+  <div class="footer-sub" style="margin-top:6px;">Internet Sehat · Generasi Bermartabat · Kampung Mandiri</div>
+  <div class="footer-sub" style="margin-top:4px;">Desa Gunung Guruh · Kec. Sukabumi · Kab. Sukabumi · Jawa Barat</div>
+</footer>
+
+<script>
+// Scroll-triggered reveal
+const revealEls = document.querySelectorAll('.bab, .prolog, .blok-tegas, .komitmen, .seruan');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+revealEls.forEach(el => observer.observe(el));
+
+// ── PARTIKEL KILAU MERAH PADA COVER ──
+const canvas = document.getElementById('coverCanvas');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const particles = [];
+const N = 55;
+
+for (let i = 0; i < N; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.8 + 0.3,
+    vx: (Math.random() - 0.5) * 0.25,
+    vy: (Math.random() - 0.5) * 0.25,
+    a: Math.random(),
+    va: (Math.random() - 0.5) * 0.012,
+    // merah atau putih, bobot banyak merah
+    red: Math.random() > 0.35
+  });
+}
+
+function drawParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (const p of particles) {
+    p.x += p.vx;
+    p.y += p.vy;
+    p.a += p.va;
+    if (p.a < 0) { p.a = 0; p.va *= -1; }
+    if (p.a > 1) { p.a = 1; p.va *= -1; }
+    if (p.x < 0) p.x = canvas.width;
+    if (p.x > canvas.width) p.x = 0;
+    if (p.y < 0) p.y = canvas.height;
+    if (p.y > canvas.height) p.y = 0;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    if (p.red) {
+      ctx.fillStyle = `rgba(220,50,50,${p.a * 0.7})`;
+      // glow merah
+      ctx.shadowColor = 'rgba(220,50,50,0.8)';
+      ctx.shadowBlur = 6;
+    } else {
+      ctx.fillStyle = `rgba(255,255,255,${p.a * 0.5})`;
+      ctx.shadowColor = 'rgba(255,255,255,0.6)';
+      ctx.shadowBlur = 4;
+    }
+    ctx.fill();
+    ctx.shadowBlur = 0;
+  }
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+</script>
+</body>
+</html>
